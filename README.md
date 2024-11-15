@@ -4,10 +4,12 @@ em chia các bài tập trong lesson ra thành các branch khác nhau. branch ma
 
 *Report:
 
-Hiểu được phạm vi truy cập của php
-Hiểu về oop
-xây dựng được các class, phương thức
-hiểu các khởi tạo 1 class
-định nghĩa và dùng các phương thức
+-Hiểu được phạm vi truy cập của php
+-Hiểu về oop
+-xây dựng được các class, phương thức
+-hiểu các khởi tạo 1 class
+-định nghĩa và dùng các phương thức
+-Lấy được giá trị từ các thuộc tính của class
+-set giá trị thông qua getter, setter
 
 -Thanks a lot-
