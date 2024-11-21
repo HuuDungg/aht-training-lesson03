@@ -1,67 +1,31 @@
 <?php
-class QuadraticEquation
+require_once 'StopWatch.php';
+
+function selectionSort(&$arr)
 {
-    private $a;
-    private $b;
-    private $c;
-
-    public function __construct($a, $b, $c)
-    {
-        $this->a = $a;
-        $this->b = $b;
-        $this->c = $c;
-    }
-
-    public function getA()
-    {
-        return $this->a;
-    }
-
-    public function getB()
-    {
-        return $this->b;
-    }
-
-    public function getC()
-    {
-        return $this->c;
-    }
-
-    public function getDiscriminant()
-    {
-        return pow($this->b, 2) - 4 * $this->a * $this->c;
-    }
-
-    public function getRoot1()
-    {
-        $delta = $this->getDiscriminant();
-        if ($delta < 0) {
-            return null;
+    $n = count($arr);
+    for ($i = 0; $i < $n - 1; $i++) {
+        $minIdx = $i;
+        for ($j = $i + 1; $j < $n; $j++) {
+            if ($arr[$j] < $arr[$minIdx]) {
+                $minIdx = $j;
+            }
         }
-        return (-$this->b + sqrt($delta)) / (2 * $this->a);
-    }
-
-    public function getRoot2()
-    {
-        $delta = $this->getDiscriminant();
-        if ($delta < 0) {
-            return null;
-        }
-        return (-$this->b - sqrt($delta)) / (2 * $this->a);
+        $temp = $arr[$minIdx];
+        $arr[$minIdx] = $arr[$i];
+        $arr[$i] = $temp;
     }
 }
 
-
-$equation = new QuadraticEquation(1, 32, 23);
-
-$delta = $equation->getDiscriminant();
-
-if ($delta > 0) {
-    echo "Phương trình có hai nghiệm: ";
-    echo "Nghiệm thứ nhất: " . $equation->getRoot1();
-    echo "Nghiệm thứ hai: " . $equation->getRoot2();
-} elseif ($delta == 0) {
-    echo "Phương trình có nghiệm kép: " . $equation->getRoot1();
-} else {
-    echo "Phương trình vô nghiệm";
+$array = [];
+for ($i = 0; $i < 1000; $i++) {
+    $array[] = rand(1, 1000);
 }
+
+$stopWatch = new StopWatch();
+
+$stopWatch->start();
+selectionSort($array);
+$stopWatch->stop();
+
+echo "Thời gian thực thi thuật toán Selection Sort: " . $stopWatch->getElapsedTime() . " ms\n";
