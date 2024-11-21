@@ -1,67 +1,25 @@
 <?php
-class QuadraticEquation
-{
-    private $a;
-    private $b;
-    private $c;
+require_once 'Person.php';
+require_once 'Employee.php';
+require_once 'EmployeeManager.php';
 
-    public function __construct($a, $b, $c)
-    {
-        $this->a = $a;
-        $this->b = $b;
-        $this->c = $c;
-    }
+$manager = new EmployeeManager();
+$filename = 'employees.json';
 
-    public function getA()
-    {
-        return $this->a;
-    }
+$employee1 = new Employee("Nguyen", "Van A", "1990-01-01", "Hanoi", "Developer", 2000);
+$employee2 = new Employee("Tran", "Thi B", "1985-03-15", "HCMC", "Designer", 2500);
+$manager->addEmployee($employee1);
+$manager->addEmployee($employee2);
 
-    public function getB()
-    {
-        return $this->b;
-    }
+echo "Danh sách nhân sự:\n";
+$manager->displayEmployeeList();
 
-    public function getC()
-    {
-        return $this->c;
-    }
+echo "\nChi tiết nhân sự thứ 1:\n";
+$manager->getEmployeeDetails(0);
 
-    public function getDiscriminant()
-    {
-        return pow($this->b, 2) - 4 * $this->a * $this->c;
-    }
+$manager->saveToFile($filename);
+echo "\nDanh sách đã được lưu vào file.\n";
 
-    public function getRoot1()
-    {
-        $delta = $this->getDiscriminant();
-        if ($delta < 0) {
-            return null;
-        }
-        return (-$this->b + sqrt($delta)) / (2 * $this->a);
-    }
-
-    public function getRoot2()
-    {
-        $delta = $this->getDiscriminant();
-        if ($delta < 0) {
-            return null;
-        }
-        return (-$this->b - sqrt($delta)) / (2 * $this->a);
-    }
-}
-
-
-$equation = new QuadraticEquation(1, 32, 23);
-
-$delta = $equation->getDiscriminant();
-
-if ($delta > 0) {
-    echo "Phương trình có hai nghiệm: ";
-    echo "Nghiệm thứ nhất: " . $equation->getRoot1();
-    echo "Nghiệm thứ hai: " . $equation->getRoot2();
-} elseif ($delta == 0) {
-    echo "Phương trình có nghiệm kép: " . $equation->getRoot1();
-} else {
-    echo "Phương trình vô nghiệm";
-}
+$manager->loadFromFile($filename);
+echo "\nDanh sách sau khi tải lại từ file:\n";
+$manager->displayEmployeeList();
